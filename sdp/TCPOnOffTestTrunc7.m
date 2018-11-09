@@ -1,21 +1,15 @@
-% In this example, we have 3 modes of the system.
-% Q={off,ca,ss}.
-% In off, there is no dynamics. So we create moment lists for both ca and
-% ss. For off, the first moment is the only moment.
-% Each mode itself is an one dimensional system.
-% Of course, we assume here that v-> 0 is the initial dynamics. Otherwise,
-% the off will have some dynamics for a while.
-
 clear; yalmip('clear');
+tic
 
-% following are the parameters (from Hespanha's paper)
-R=50; % 50 ms
-toff=10; % 1 second
-p=0.1;
+R=0.5;
+toff=1;
+p=0.5;
 k=1/p;
 v0=1;
 delta=0.1;
 sigma=0.01;
+
+
 MomList=sdpvar(18,1); 
 %[b1, b2, b1v1, b2v1, b1v2, b2v2, b1v3, b2v3]
 
@@ -73,9 +67,8 @@ obj = MomList(2);
 
 
 MinSol = optimize(F,obj,opts);
-%MinMomList = value(MomList)
 MinVal = value(obj)
 
 MaxSol = optimize(F,-obj,opts);
-%MaxMomList = value(MomList)
 MaxVal = value(obj)
+toc
