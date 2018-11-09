@@ -1,15 +1,10 @@
 import numpy as np
 import numpy.random as rnd
-import utils as ut
-import scipy.linalg as la
-import cvxpy as cvx
-import scipy.special as sfun
-import randSDP as rs
 import poly as pl
 
         
 
-class jumpDiffusion:
+class singleModeSHS:
     def __init__(self,x,u=None,f=None,g=None,Lam=[],Phi=[]):
         self.x = x
         self.u = u
